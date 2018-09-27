@@ -4,7 +4,7 @@ $( document ).ready(function() {
     var correct = 0;
     var incorrect = 0;
     var unanswered = 0;
-    var timeLeft = 5;
+    var timeLeft = 15;
     var currentQuestion = -1;
     var userGuess;
     var intervalId;
@@ -16,14 +16,49 @@ var questionList = [
         answer: 0
     },
     {
+        question: "A fortnight is a unit of time equal to how many days?",
+        choices: ["5 Days", "3 Days", "14 Days", "7 Days"],
+        answer: 2
+    },
+    {
         question: "In the game of pool, what is the standard color for the one ball?",
         choices: ["Red", "Yellow", "Orange", "Blue"],
         answer: 1
     },
     {
-        question: "A fortnight is a unit of time equal to how many days?",
-        choices: ["5 Days", "3 Days", "14 Days", "7 Days"],
+        question: "When referring to a type of music, what does R&B stand for?",
+        choices: ["Rock and Bounce", "Rock and Blues", "Rhythm and Blues", "Rhythm and Bounce"],
         answer: 2
+    },
+    {
+        question: "What is Earth’s largest animal?",
+        choices: ["Cat lol", "Colossal Squid", "African Elephant", "Blue Whale"],
+        answer: 3
+    },
+    {
+        question: "What is the most popular breed of dog in the United States?",
+        choices: ["Poodle", "Husky", "Labrador Retriever", "Shepherd"],
+        answer: 2
+    },
+    {
+        question: "How many people have walked on the moon?",
+        choices: ["Seven", "Three", "Twelve", "Twenty"],
+        answer: 2
+    },
+    {
+        question: "What does the word KARAOKE mean?",
+        choices: ["Sing Out Loud", "Empty Orchestra", "Microphone", "Harmony"],
+        answer: 1
+    },
+    {
+        question: "What is the English translation for the name of the German automaker Volkswagen?",
+        choices: ["Safest Car", "Best Car", "People's Car", "Fastest Car"],
+        answer: 2
+    },
+    {
+        question: "What was the first console video game that allowed the game to be saved?",
+        choices: ["The Legend of Zelda", "Super Mario", "Pokemon", "Space War"],
+        answer: 0
     },
 ];
 
@@ -42,7 +77,7 @@ function startBtn () {
 function newQA () {
     $("#wrapper").show();
     currentQuestion++;
-    timeLeft = 5;
+    timeLeft = 15;
     countDown();
     console.log(currentQuestion);
     // choicesBtn();
@@ -56,7 +91,7 @@ function newQA () {
 // check if answer is correct
 function checkAnswer () {
 
-    if (currentQuestion == 2) {
+    if (currentQuestion == 9) {
         if (userGuess === questionList[currentQuestion].answer) {
             $("#wrapper").hide();
             $("#message").show();
@@ -68,7 +103,7 @@ function checkAnswer () {
                 $("#wrapper").hide();
                 $("#message").hide();
                 scores();
-            }, 5000);
+            }, 3000);
         }
         else if (userGuess !== questionList[currentQuestion].answer) {
             $("#wrapper").hide();
@@ -81,7 +116,7 @@ function checkAnswer () {
                 $("#mwrapper").hide();
                 $("#message").hide();
                 scores();
-            }, 5000);
+            }, 3000);
         }
     }
 
@@ -95,7 +130,7 @@ function checkAnswer () {
         setTimeout(function () {
             $("#message").hide();
             newQA();
-        }, 5000);
+        }, 3000);
     }
 
     else if (userGuess !== questionList[currentQuestion].answer) {
@@ -108,7 +143,7 @@ function checkAnswer () {
         setTimeout(function () {
             $("#message").hide();
             newQA();
-        }, 5000);
+        }, 3000);
     }
 }
 
@@ -117,7 +152,7 @@ function decrement() {
     timeLeft--;
     $("#time-left").html("<h2>" + "Time Remaining:&nbsp" + "</h2>" + "<h2>" + timeLeft + "</h2>");
     if (timeLeft <= 0) {
-        if (currentQuestion == 2) {
+        if (currentQuestion == 9) {
             $("#wrapper").hide();
             $("#message").show();
             $("#message").html("<h4>" + "Time's Up!" + "</h4>" + "<h5>" + "Correct Answer:" + "</h5>" + "<h5>" + questionList[currentQuestion].choices[questionList[currentQuestion].answer] + "</h5>");
@@ -128,7 +163,7 @@ function decrement() {
                 $("#message").hide();
                 $("#wrapper").hide();
             scores();
-        },5000);
+        },3000);
         }
 
         else {
@@ -141,7 +176,7 @@ function decrement() {
         setTimeout(function () {
             $("#message").hide();
             newQA();
-        },5000);
+        },3000);
     }
     }
 }
@@ -156,6 +191,7 @@ function countDown () {
 
 // display scores
 function scores () {
+        $("#scores").show();
     clearInterval(intervalId);
         $("#wrapper").hide();
         console.log(correct);
@@ -172,6 +208,9 @@ function newGameBtn () {
     $("#newGameBtn").show();
     $("#newGameBtn").on("click", function (){
         currentQuestion = -1;
+        correct = 0;
+        incorrect = 0;
+        unanswered = 0;
         newQA();
         $("#scores").hide();
         $("#newGameBtn").hide();
