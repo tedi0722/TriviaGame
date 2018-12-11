@@ -3,7 +3,7 @@
 ### Overview
 This trivia game uses mainly JavaScript. Each question is timed and each answer is stored. At the end of the game, the score is displayed as well as a button that lets the player play the game again. 
 
-### Technology Used
+### Technologies
 * html
 * css
 * bootstrap
